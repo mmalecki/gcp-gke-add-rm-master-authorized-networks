@@ -1,0 +1,10 @@
+{
+  "name": "gcp-gke-punch-master-authorized-networks",
+  "version": "0.0.0",
+  "dependencies": {
+    "@google-cloud/container": "^0.3.0"
+  },
+  "bin": {
+    "gcp-gke-punch-master-authorized-networks": "./bin/gcp-gke-punch-master-authorized-networks"
+  }
+}
