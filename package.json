@@ -1,6 +1,6 @@
 {
   "name": "gcp-gke-add-rm-master-authorized-networks",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "dependencies": {
     "@google-cloud/container": "^0.3.0"
   },
