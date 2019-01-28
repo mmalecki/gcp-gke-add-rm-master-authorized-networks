@@ -5,7 +5,7 @@
     "@google-cloud/container": "^0.3.0"
   },
   "bin": {
-    "gcp-gke-add-authorized-network": "./bin/gcp-gke-add-master-authorized-network",
-    "gcp-gke-rm-authorized-network": "./bin/gcp-gke-rm-master-authorized-network"
+    "gcp-gke-add-master-authorized-network": "./bin/gcp-gke-add-master-authorized-network",
+    "gcp-gke-rm-master-authorized-network": "./bin/gcp-gke-rm-master-authorized-network"
   }
 }
