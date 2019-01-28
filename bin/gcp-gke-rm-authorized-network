@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+const client = require('../client.js')
+
+async function rm(cidr, currentConfig) {
+  const index = currentConfig.cidrBlocks.findIndex(cidrBlock =>
+    cidrBlock.cidrBlock === cidr && cidrBlock.displayName.startsWith('punched-')
+  )
+
+  if (index === -1) {
+    console.log('cidr not found')
+    process.exit(2)
+  }
+
+  console.log('removing', currentConfig.cidrBlocks.splice(index, 1)[0])
+  return client.setDesiredMasterAuthorizedNetworksConfig(currentConfig)
+}
+
+function help() {
+  console.log('usage: gcp-gke-rm-authorized-network <cidr>')
+  process.exit(1)
+}
+
+async function main() {
+  const clusterData = await client.getConfig()
+  const currentConfig = clusterData[0].masterAuthorizedNetworksConfig
+  console.log('current config', currentConfig)
+
+  const cidr = process.argv[2]
+  if (!cidr) return help()
+  rm(cidr, currentConfig)
+}
+
+main()

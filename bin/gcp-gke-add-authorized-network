@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+const client = require('../client.js')
+
+async function add(cidr, currentConfig) {
+  currentConfig.cidrBlocks.push({
+    displayName: `punched-${(new Date()).toISOString()}`,
+    cidrBlock: cidr
+  })
+  return client.setDesiredMasterAuthorizedNetworksConfig(currentConfig)
+}
+
+function help() {
+  console.log('usage: gcp-gke-add-authorized-network <cidr>')
+  process.exit(1)
+}
+
+async function main() {
+  const clusterData = await client.getConfig()
+  const currentConfig = clusterData[0].masterAuthorizedNetworksConfig
+  console.log('current config', currentConfig)
+
+  const cidr = process.argv[2]
+  if (!cidr) return help()
+  add(cidr, currentConfig)
+}
+
+
+main()
